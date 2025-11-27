@@ -1,0 +1,42 @@
+# Build directories
+build/
+cmake-build-*/
+dist/
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
+*.cmake
+
+# Conan
+conan.lock
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+*~
+.DS_Store
+
+# Executables
+*.o
+*.a
+*.so
+*.dylib
+*.exe
+*.out
+
+# Test outputs
+test_results/
+*.log
+
+# Dependencies (Conan installs)
+dependencies/
+
+# Temporary files
+*.tmp
+temp/
