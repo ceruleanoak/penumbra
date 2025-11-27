@@ -1,0 +1,88 @@
+agents:
+  - name: boilerplate-generator
+    file: boilerplate-generator.md
+    description: Generate C++ project scaffolding, CMake files, build configuration
+    token_budget: 40000
+    priority: critical
+    phase: 0
+    trigger: Project initialization
+
+  - name: gml-analyzer
+    file: gml-analyzer.md
+    description: Extract architectural patterns, formulas, and logic from GameMaker GML for C++ migration
+    token_budget: 80000
+    priority: high
+    phase: 1-4
+    trigger: Before each implementation phase
+
+  - name: graphics-implementation
+    file: graphics-implementation.md
+    description: Implement 3D isometric rendering pipeline using OpenGL 3.3+ and SDL2
+    token_budget: 100000
+    priority: critical
+    phase: 1-2
+    trigger: Phase 1 graphics foundation
+
+  - name: physics-collision
+    file: physics-collision.md
+    description: Implement grid-based movement physics and 3D collision detection
+    token_budget: 70000
+    priority: high
+    phase: 2-3
+    trigger: After graphics validation
+
+  - name: content-migration
+    file: content-migration.md
+    description: Convert game content from GameMaker format to C++ JSON format
+    token_budget: 60000
+    priority: medium
+    phase: 3-4
+    trigger: After gameplay systems complete
+
+  - name: testing-validation
+    file: testing-validation.md
+    description: Write comprehensive unit/integration tests and validate implementations
+    token_budget: 50000
+    priority: medium
+    phase: 1-4
+    trigger: After each component implementation
+
+coordination:
+  blocking_dependencies:
+    - "Phase 0 → Phase 1: Boilerplate must complete before Graphics starts"
+    - "Phase 1 → Phase 2: Rendering must be validated before Physics starts"
+    - "Phase 2 → Phase 3: Player movement must be stable before Platforms start"
+    - "Phase 3 → Phase 4: Gameplay must be complete before Content migrates"
+
+  parallel_opportunities:
+    - "While graphics-implementation runs: gml-analyzer studies Room3D"
+    - "While physics-collision runs: gml-analyzer studies obj_player"
+    - "While physics-collision runs: content-migration converts rooms"
+    - "Continuously: testing-validation runs after each component"
+
+  token_budget_allocation:
+    phase_0: 30000
+    phase_1: 150000
+    phase_2: 160000
+    phase_3: 150000
+    phase_4: 120000
+    total: 610000
+
+output_specifications:
+  gml-analyzer:
+    format: "Markdown document with sections: Purpose, Data Structures, Algorithms, State Machines, Dependencies, Edge Cases, C++ Port Notes"
+
+  graphics-implementation:
+    format: "Complete C++ files + usage examples + integration guide + test validation"
+
+  physics-collision:
+    format: "Complete C++ implementation + state diagrams + integration examples + GML regression validation"
+
+  content-migration:
+    format: "JSON files in project structure + conversion report + lossless validation"
+
+  testing-validation:
+    format: "Test suite (.cpp) + test data + execution report + coverage analysis"
+
+  boilerplate-generator:
+    format: "Complete project scaffolding + CMakeLists.txt + conanfile.txt + shader templates"
